@@ -11,28 +11,23 @@ const robots = [
   { name: 'Ratchet', alliance: null }
 ];
 
-function uncoveringRobots(){
-  return robots.map(function(robot){
-    if (knownDecepticons.includes(robot.name)){
-      return {name: robot.name, alliance: 'decepticon'}
-    }
 
-    return {name: robot.name, alliance: 'autobot'}
+function uncoveringRobots(){
+  let newArr = []
+  robots.map(function(robot){
+    if (knownDecepticons.includes(robot.name)){
+      const decepticon = Object.assign({}, robot, {alliance: 'decepticon'});
+      newArr.push(decepticon)
+    }
+    else {
+      const autobot = Object.assign({}, robot, {alliance: 'autobot'});
+      newArr.push(autobot)
+    }
   })
+  return newArr
 }
 
 const sortedRobots = uncoveringRobots()
-// function uncoveringRobots(){
-//   return robots.map(function(robot){
-//     const isIncluded = knownDecepticons.includes(robot.name)
-//         , { name } = robot
-//         , alliance = isIncluded ? 'decepticon' : 'autobot';
-//
-//     return {name, alliance};
-//   })
-// }
-
-
 
 const zebraStripes = [
   { width: 9.12, color: null },
@@ -47,8 +42,10 @@ const zebraStripes = [
 
 
   const coloredZebraStripes = zebraStripes.map((stripe, index) => {
-    if (index % 2 === 0 ) {
-      return {width: stripe.width, color: "black"}
+    if (index % 2 === 0){
+      return Object.assign({}, stripe, {color: 'black'})
     }
-    return {width: stripe.width, color: "white"}
+    else {
+      return Object.assign({}, stripe, {color: 'white'})
+    }
   })
